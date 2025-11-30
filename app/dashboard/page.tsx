@@ -40,17 +40,6 @@ export default function DashboardPage() {
               <p className="text-muted-foreground">Upload and analyze your documents with AI-powered insights</p>
             </div>
 
-            {/* Upload CTA */}
-            <Link href="/upload">
-              <div className="card-hover p-8 mb-8 cursor-pointer hover:shadow-lg transition-all duration-200">
-                <div className="w-16 h-16 bg-primary/10 rounded-lg flex items-center justify-center mx-auto mb-4">
-                  <Plus className="w-8 h-8 text-primary" />
-                </div>
-                <h3 className="text-lg font-semibold text-foreground mb-1 text-center">Upload a document</h3>
-                <p className="text-muted-foreground text-center">PDF, Word, or Text files</p>
-              </div>
-            </Link>
-
             {/* Documents Section */}
             {documents.length > 0 ? (
               <div className="mb-6">
