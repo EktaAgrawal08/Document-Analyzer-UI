@@ -2,12 +2,22 @@
 
 import Link from "next/link"
 import { ArrowRight, FileText, Zap, Brain, Shield, BarChart3, Clock } from "lucide-react"
+import { useState, useEffect } from "react"
 
 export default function Home() {
+  const [isScrolled, setIsScrolled] = useState(false)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 10)
+    }
+    window.addEventListener("scroll", handleScroll)
+    return () => window.removeEventListener("scroll", handleScroll)
+  }, [])
   return (
     <div className="min-h-screen bg-background">
       {/* Navigation */}
-      <nav className="border-b border-border">
+      <nav className={`navbar-scroll border-b border-border transition-all duration-300 ${isScrolled ? "scrolled" : ""}`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 bg-gradient-to-br from-primary to-accent rounded-lg flex items-center justify-center">
@@ -16,10 +26,10 @@ export default function Home() {
             <h1 className="text-xl font-bold text-foreground">DocAnalyzer</h1>
           </div>
           <div className="flex items-center gap-4">
-            <Link href="/login" className="px-4 py-2 text-foreground hover:text-primary transition-colors">
+            <Link href="/login" className="px-4 py-2 text-foreground hover:text-primary transition-colors duration-300 btn-hover-scale">
               Sign In
             </Link>
-            <Link href="/signup" className="px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors font-medium">
+            <Link href="/signup" className="px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-all duration-300 font-medium btn-hover-scale">
               Get Started
             </Link>
           </div>
@@ -37,10 +47,10 @@ export default function Home() {
               Upload your documents and let our AI-powered assistant extract insights in seconds.
             </p>
             <div className="flex gap-4">
-              <Link href="/signup" className="px-6 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors font-medium flex items-center gap-2">
+              <Link href="/signup" className="px-6 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-all duration-300 font-medium flex items-center gap-2 btn-hover-scale">
                 Start Free Trial <ArrowRight className="w-4 h-4" />
               </Link>
-              <Link href="#features" className="px-6 py-2 border border-border text-foreground rounded-lg hover:bg-muted transition-colors font-medium">
+              <Link href="#features" className="px-6 py-2 border border-border text-foreground rounded-lg hover:bg-muted transition-all duration-300 font-medium btn-hover-scale">
                 Learn More
               </Link>
             </div>
@@ -67,7 +77,7 @@ export default function Home() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {/* Feature 1 */}
-          <div className="card-hover p-4 rounded-lg border border-border">
+          <div className="card-lift p-4 rounded-lg border border-border bg-card/50 backdrop-blur-sm hover:bg-card/80 transition-colors">
             <div className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center mb-3">
               <Brain className="w-5 h-5 text-primary" />
             </div>
@@ -78,7 +88,7 @@ export default function Home() {
           </div>
 
           {/* Feature 2 */}
-          <div className="card-hover p-4 rounded-lg border border-border">
+          <div className="card-lift p-4 rounded-lg border border-border bg-card/50 backdrop-blur-sm hover:bg-card/80 transition-colors">
             <div className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center mb-3">
               <Zap className="w-5 h-5 text-primary" />
             </div>
@@ -89,7 +99,7 @@ export default function Home() {
           </div>
 
           {/* Feature 3 */}
-          <div className="card-hover p-4 rounded-lg border border-border">
+          <div className="card-lift p-4 rounded-lg border border-border bg-card/50 backdrop-blur-sm hover:bg-card/80 transition-colors">
             <div className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center mb-3">
               <Shield className="w-5 h-5 text-primary" />
             </div>
@@ -100,7 +110,7 @@ export default function Home() {
           </div>
 
           {/* Feature 4 */}
-          <div className="card-hover p-4 rounded-lg border border-border">
+          <div className="card-lift p-4 rounded-lg border border-border bg-card/50 backdrop-blur-sm hover:bg-card/80 transition-colors">
             <div className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center mb-3">
               <FileText className="w-5 h-5 text-primary" />
             </div>
@@ -111,7 +121,7 @@ export default function Home() {
           </div>
 
           {/* Feature 5 */}
-          <div className="card-hover p-4 rounded-lg border border-border">
+          <div className="card-lift p-4 rounded-lg border border-border bg-card/50 backdrop-blur-sm hover:bg-card/80 transition-colors">
             <div className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center mb-3">
               <BarChart3 className="w-5 h-5 text-primary" />
             </div>
@@ -122,7 +132,7 @@ export default function Home() {
           </div>
 
           {/* Feature 6 */}
-          <div className="card-hover p-4 rounded-lg border border-border">
+          <div className="card-lift p-4 rounded-lg border border-border bg-card/50 backdrop-blur-sm hover:bg-card/80 transition-colors">
             <div className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center mb-3">
               <Clock className="w-5 h-5 text-primary" />
             </div>
@@ -174,7 +184,7 @@ export default function Home() {
       </section>
 
       {/* CTA Section */}
-      <section className="bg-gradient-to-r from-primary/10 to-accent/10 border border-border rounded-xl max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 mb-12">
+      <section className="glow-animate bg-gradient-to-r from-primary/10 to-accent/10 border border-border rounded-xl max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 mb-12">
         <div className="text-center">
           <h3 className="text-2xl font-bold text-foreground mb-2">
             Ready to get started?
@@ -182,7 +192,7 @@ export default function Home() {
           <p className="text-muted-foreground mb-4">
             Join users who are saving time with DocAnalyzer.
           </p>
-          <Link href="/signup" className="px-6 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors font-medium inline-flex items-center gap-2">
+          <Link href="/signup" className="px-6 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-all duration-300 font-medium inline-flex items-center gap-2 btn-hover-scale">
             Get Started Free <ArrowRight className="w-4 h-4" />
           </Link>
         </div>
